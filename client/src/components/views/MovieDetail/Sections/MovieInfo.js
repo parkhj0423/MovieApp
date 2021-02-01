@@ -2,7 +2,7 @@ import React from 'react'
 import {Descriptions} from 'antd'
 
 function MovieInfo(props) {
-    let { movie } = props; //! let movie = preps.movie
+    let { movie } = props; //! let movie = props.movie
 
     // const [Genre, setGenre] = useState([])
 

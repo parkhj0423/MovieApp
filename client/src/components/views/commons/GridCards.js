@@ -86,6 +86,23 @@ function GridCards(props) {
                 </a>
             </div>
         </Col>)
+    }else if(props.searchPage){
+        return (<Col lg={4} md={6} xs={12}>
+            <div style={{position:'relative'}} >
+                <a href={`/movie/${props.movieId}`} >
+                    <img style={{width:'80%',height:'250px'}} src={props.image} alt={`${props.movieName}`}  />
+                    <span className='desc' >
+                        제목 : {props.movieName}<br/><br/>
+                        장르 : {genreConfig(props.genre)}<br/><br/>
+                        개봉일 : {props.releaseDate}<br/><br/>
+                        평점 : {props.voteAverage}/ 10<br/><br/>
+                        {props.isAdult ? 
+                        <img src='https://as1.ftcdn.net/jpg/03/82/76/66/500_F_382766642_6wXnMs19WwKcMQOlgjM6RkCc9Sj7PUgL.jpg' alt='19+'/>
+                        : <img src='https://as1.ftcdn.net/jpg/04/02/40/00/500_F_402400066_EY9GQhvkCaYg55JmX7HARWLACUDBUuQZ.jpg' alt='19-'/> }<br/><br/>
+                    </span>
+                </a>
+            </div>
+        </Col>)
     }else {
         return (
             <Col lg={2} md={3} xs={8}>
@@ -96,6 +113,7 @@ function GridCards(props) {
         </Col>
         )
     }
+    
 }
 
 export default GridCards

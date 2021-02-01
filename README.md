@@ -1,6 +1,3 @@
-Hello, My Friends  
-Thank you for having interest in this repository ! 
-
 To use this application, 
 
 1. make dev.js file inside config folder 
@@ -9,10 +6,10 @@ To use this application,
 4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
 
 
-If you have problem, feel free to ask me ^^ 
+Thank you!
 
-You can watch the tutorial for this app.
+email : parkhj0423@naver.com
 
-https://www.youtube.com/channel/UCFyXA9x8lpL3EYWeYhj4C4Q?view_as=subscriber
-
-
+log
+2021-01-31 : 4types of tabs with different apis add
+2021-02-02 : movie search / logo / favicon add

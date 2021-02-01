@@ -1,11 +1,20 @@
 import React,{useEffect,useState} from 'react'
-import {Typography, Row,Button,Tabs} from 'antd';
+import {Typography, Row,Button,Tabs,Input} from 'antd';
 import { API_KEY, API_URL, IMAGE_BASE_URL } from '../../Config'
 import MainImage from './Section/MainImage'
 import GridCards from '../commons/GridCards';
+import MovieSearchPage from './Section/MovieSearchPage';
 const {Title} = Typography
+const {Search} = Input
 const { TabPane } = Tabs;
+
+
 function LandingPage() {
+
+    const [PopSearchValue, setPopSearchValue] = useState('')
+    const [NowSearchValue, setNowSearchValue] = useState('')
+    const [UpSearchValue, setUpSearchValue] = useState('')
+    const [TopSearchValue, setTopSearchValue] = useState('')
    
     const [PopularMovies, setPopularMovies] = useState([])
     const [NowPlayingMovies, setNowPlayingMovies] = useState([])
@@ -77,11 +86,6 @@ function LandingPage() {
         }
     }
 
-    
-    
-    
-   
-
     const loadMorePopItems = () => {
         console.log('Poppage :',PopCurrentPage)
         const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${PopCurrentPage}`
@@ -118,6 +122,24 @@ function LandingPage() {
     //     </Col>);
     // })
 
+    
+
+
+    const onPopSearchChange = (event) => {
+        setPopSearchValue(event.currentTarget.value)
+    }
+    const onNowSearchChange = (event) => {
+        setNowSearchValue(event.currentTarget.value)
+    }
+    const onUpSearchChange = (event) => {
+        setUpSearchValue(event.currentTarget.value)
+    }
+    const onTopSearchChange = (event) => {
+        setTopSearchValue(event.currentTarget.value)
+    }
+
+   
+
 
     return (
         <Tabs defaultActiveKey='1' centered style={{backgroundColor:'#0e1d24', border:'none'}}>
@@ -132,13 +154,29 @@ function LandingPage() {
                     />
                     }
                     <div style={{width:'85%', margin:'1rem auto'}}>
-                        <Title level={2}>Movies by Popular</Title>
+                        <div style={{display:'flex',justifyContent:'space-between'}}>
+                            <Title level={2}>Movies by Popular</Title>
+                            <Search
+                                placeholder="Search Movies!"
+                                allowClear
+                                enterButton="Search"
+                                size="large"
+                                onChange={onPopSearchChange}
+                                value={PopSearchValue}
+                                style={{width:'300px',padding:'10px'}}
+                             />  
+                        </div>   
+                        {PopSearchValue &&  
+                            <React.Fragment>    
+                                <hr/>
+                                <Title level={2} style={{color:'white'}}>Searched Movies!!!</Title>
+                                <MovieSearchPage movies={PopularMovies} SearchValue={PopSearchValue} />
+                            </React.Fragment>      
+                        }
                         <hr/>
-
                         {/* Movie Grid Cards */}
                         <Row gutter={[16,16]}>
                             {PopularMovies && PopularMovies.map((movie,index) => (
-                            
                                     <GridCards 
                                         key={index}
                                         landingPage
@@ -149,7 +187,7 @@ function LandingPage() {
                                         isAdult={movie.adult}
                                         releaseDate={movie.release_date}
                                         voteAverage={movie.vote_average}
-                                    />
+                                    />                           
                             ))}
                             {/* {renderCards}  */}
                         </Row>
@@ -171,7 +209,25 @@ function LandingPage() {
                     />
                     }
                     <div style={{width:'85%', margin:'1rem auto'}}>
-                        <Title level={2}>Movies by NowPlaying</Title>
+                    <div style={{display:'flex',justifyContent:'space-between'}}>
+                            <Title level={2}>Movies by NowPlaying</Title>
+                            <Search
+                                placeholder="Search Movies!"
+                                allowClear
+                                enterButton="Search"
+                                size="large"
+                                onChange={onNowSearchChange}
+                                value={NowSearchValue}
+                                style={{width:'300px',padding:'10px'}}
+                             />  
+                        </div>   
+                        {NowSearchValue &&  
+                            <React.Fragment>    
+                                <hr/>
+                                <Title level={2} style={{color:'white'}}>Searched Movies!!!</Title>
+                                <MovieSearchPage movies={NowPlayingMovies} SearchValue={NowSearchValue} />
+                            </React.Fragment>      
+                        } 
                         <hr/>
 
                         {/* Movie Grid Cards */}
@@ -210,7 +266,25 @@ function LandingPage() {
                     />
                     }
                     <div style={{width:'85%', margin:'1rem auto'}}>
-                        <Title level={2}>Movies by Upcoming</Title>
+                    <div style={{display:'flex',justifyContent:'space-between'}}>
+                            <Title level={2}>Movies by Upcoming</Title>
+                            <Search
+                                placeholder="Search Movies!"
+                                allowClear
+                                enterButton="Search"
+                                size="large"
+                                onChange={onUpSearchChange}
+                                value={UpSearchValue}
+                                style={{width:'300px',padding:'10px'}}
+                             />  
+                        </div>   
+                        {UpSearchValue &&  
+                            <React.Fragment>    
+                                <hr/>
+                                <Title level={2} style={{color:'white'}}>Searched Movies!!!</Title>
+                                <MovieSearchPage movies={UpcomingMovies} SearchValue={UpSearchValue} />
+                            </React.Fragment>      
+                        }
                         <hr/>
 
                         {/* Movie Grid Cards */}
@@ -248,7 +322,25 @@ function LandingPage() {
                     />
                     }
                     <div style={{width:'85%', margin:'1rem auto'}}>
-                        <Title level={2}>Movies by TopRated</Title>
+                    <div style={{display:'flex',justifyContent:'space-between'}}>
+                            <Title level={2}>Movies by TopRated</Title>
+                            <Search
+                                placeholder="Search Movies!"
+                                allowClear
+                                enterButton="Search"
+                                size="large"
+                                onChange={onTopSearchChange}
+                                value={TopSearchValue}
+                                style={{width:'300px',padding:'10px'}}
+                             />  
+                        </div>   
+                        {TopSearchValue &&  
+                            <React.Fragment>    
+                                <hr/>
+                                <Title level={2} style={{color:'white'}}>Searched Movies!!!</Title>
+                                <MovieSearchPage movies={TopRatedMovies} SearchValue={TopSearchValue} />
+                            </React.Fragment>      
+                        }   
                         <hr/>
 
                         {/* Movie Grid Cards */}

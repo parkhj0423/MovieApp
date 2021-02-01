@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
-import { Icon} from 'antd'
+import { message,Icon} from 'antd'
+import { withRouter } from "react-router-dom";
 function Favorite(props) {
     
     const [FavoriteNumber, setFavoriteNumber] = useState(0)
@@ -48,27 +49,31 @@ function Favorite(props) {
     }, [])
 
     const onIconClick = () => {
-        
-        if(Favorited){
-            axios.post('/api/favorite/removeFromFavorite',variable)
-            .then(response => {
-                if(response.data.success){
-                    setFavoriteNumber(FavoriteNumber-1)
-                    setFavorited(!Favorited)
-                }else{
-                    alert('favorite 삭제 실패')
-                }
-            })
-        }else {
-            axios.post('/api/favorite/addToFavorite',variable)
-            .then(response => {
-                if(response.data.success){
-                    setFavoriteNumber(FavoriteNumber+1)
-                    setFavorited(!Favorited)
-                }else{
-                    alert('favorite 추가 실패')
-                }
-            })
+        if(localStorage.getItem('userId')){
+            if(Favorited){
+                axios.post('/api/favorite/removeFromFavorite',variable)
+                .then(response => {
+                    if(response.data.success){
+                        setFavoriteNumber(FavoriteNumber-1)
+                        setFavorited(!Favorited)
+                    }else{
+                        alert('favorite 삭제 실패')
+                    }
+                })
+            }else {
+                axios.post('/api/favorite/addToFavorite',variable)
+                .then(response => {
+                    if(response.data.success){
+                        setFavoriteNumber(FavoriteNumber+1)
+                        setFavorited(!Favorited)
+                    }else{
+                        alert('favorite 추가 실패')   
+                    }
+                })
+            }
+        }else{
+            message.error('로그인 후에 이용 가능합니다')
+            props.history.push('/login')
         }
 
     }
@@ -76,9 +81,9 @@ function Favorite(props) {
     return (
         <div >
             <Icon type='star' theme={Favorited ? 'filled' : 'outlined'} style={{fontSize:'35px'}} onClick={onIconClick} />
-            <p>이 영화를 좋아하는 사람 {FavoriteNumber}</p>
+            <p>{FavoriteNumber}Likes</p>
         </div>
     )
 }
 
-export default Favorite
+export default withRouter(Favorite)
