@@ -1,17 +1,17 @@
-import React,{useState} from 'react'
+import React from 'react'
 import {Descriptions} from 'antd'
 
 function MovieInfo(props) {
     let { movie } = props; //! let movie = preps.movie
 
-    const [Genre, setGenre] = useState([])
+    // const [Genre, setGenre] = useState([])
 
-    // let genres = movie.genres.map((genre,index)=> {
-    //     setGenre(genre);
-    // })
+    // // let genres = movie.genres.map((genre,index)=> {
+    // //     setGenre(genre);
+    // // })
     
-    console.log(props.movie.genres)
-    // for(let i =0; i<props.movie.genres.length)
+    // console.log(props.movie.genres)
+    // // for(let i =0; i<props.movie.genres.length)
     
     return (
         <Descriptions title="Movie Info" bordered>

@@ -88,7 +88,7 @@ function GridCards(props) {
         </Col>)
     }else {
         return (
-            <Col lg={3} md={4} xs={8}>
+            <Col lg={2} md={3} xs={8}>
             <div style={{position:'relative'}} >    
                 <img style={{width:'80%',height:'100px'}} src={props.image} alt={`${props.characterName}`}  />   
                 <p style={{fontSize:'10px'}}>{props.characterName}</p>         
