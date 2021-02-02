@@ -3,15 +3,12 @@ import {Descriptions} from 'antd'
 
 function MovieInfo(props) {
     let { movie } = props; //! let movie = props.movie
-
-    // const [Genre, setGenre] = useState([])
-
-    // // let genres = movie.genres.map((genre,index)=> {
-    // //     setGenre(genre);
-    // // })
     
-    // console.log(props.movie.genres)
-    // // for(let i =0; i<props.movie.genres.length)
+    // 여기 엄청 헤맸다... object형 배열출력은 for in 사용으로 key값으로 value를 출력
+    let Genre = []
+    for(let key in movie.genres){
+        Genre.push(movie.genres[key].name,' ')
+     }
     
     return (
         <Descriptions title="Movie Info" bordered>
@@ -25,7 +22,7 @@ function MovieInfo(props) {
             <Descriptions.Item label="득표 수">{movie.vote_count}</Descriptions.Item>
             <Descriptions.Item label="상영 여부">{movie.status}</Descriptions.Item>
             <Descriptions.Item label="인기도">{movie.popularity}</Descriptions.Item>
-            {/* <Descriptions.Item label="장르">{Genre}</Descriptions.Item> */}
+            <Descriptions.Item label="장르">{Genre}</Descriptions.Item>
         </Descriptions>
     )
 }

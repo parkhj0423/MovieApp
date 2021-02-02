@@ -37,6 +37,7 @@ function MovieDetail(props) {
 
     const onActorToggle = () => {
         setActorToggle(!ActorToggle)
+        
     }
    
 
